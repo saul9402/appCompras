@@ -72,7 +72,9 @@
                  class="form-control"
                  id="email"
                  name="email"
-                 ngModel>
+                 ngModel
+                 required
+                 email>
         </div>
         <div class="form-group">
           <label>Persona de contacto</label>
@@ -89,6 +91,11 @@
     <hr>
     <pre>{{ proveedor | json }}</pre>
     <hr>
+    <h4>Estado Dirty: {{ formpro.controls.email.dirty }}</h4> <!--Cundo el usuario comineza a usar el campo-->
+    <h4>Estado Pristine: {{ formpro.controls.email.pristine }}</h4> <!--Cuando el campo aun no se ha tocado-->
+    <h4>Estado touched: {{ formpro.controls.email.touched }}</h4><!--Cuando ya paso por el campo pero ahora está en otro-->
+    <h4>Estado valid: {{ formpro.controls.email.valid }}</h4>
+    <h4>Estado invalid: {{ formpro.controls.email.invalid }}</h4>
   </div>
   <div class="col col-md"></div>
 </div>
