@@ -2,47 +2,72 @@
     <div class="col col-md"></div>
     <div class="col-10 col-md-8">    
       <h2>Añadir nuevo presupuesto</h2>
-      <form>
+      <form [formGroup]="presupuestoForm" (ngSubmit) = "onSubmit()">
         <div class="form-group">
           <label for="proveedor">Proveedor</label>
           <input type="text"
-              class="form-control" id="proveedor">
+              class="form-control" id="proveedor"
+              formControlName="proveedor">
+              <!--Con la linea de arriba se enlaza la propiedad del html con la propiedad del componente--> 
         </div>
         <div class="form-group">
             <label for="fecha">Fecha</label>
             <input type="date"
-                class="form-control" id="fecha">
+                class="form-control" id="fecha"
+                formControlName="fecha">
           </div>
           <div class="form-group">
               <label for="concepto">Concepto</label>
               <input type="text"
-                  class="form-control" id="concepto">
+                  class="form-control" id="concepto"
+                  formControlName="concepto">
             </div>
             <div class="form-group">
                 <label for="base">Base Imponible</label>
                 <input type="number"
-                    class="form-control" id="base">
+                    class="form-control" id="base"
+                    formControlName="base">
               </div>
             <div class="form-group">
               <label for="tipo">Tipo de IVA</label>
-              <select id="tipo" class="form-control">
+              <select id="tipo" class="form-control"
+              formControlName="tipo">
                 <option value="">Seleccione...</option>
                 <option value=0>0%</option>
-                <option value=0>0.04%</option>
-                <option value=0>0.10%</option>
-                <option value=0>0.21%</option>
+                <option value=0.04>0.04%</option>
+                <option value=0.10>0.10%</option>
+                <option value=0.21>0.21%</option>
               </select>
             </div>
             <div class="form-group">
+                <label for="iva">Importe IVA</label>
+                <input type="number"
+                    class="form-control" id="iva"
+                    formControlName="iva">
+              </div>
+            <div class="form-group">
                 <label for="total">Total Presupuesto</label>
                 <input type="number"
-                    class="form-control" id="base">
+                    class="form-control" id="total"
+                    formControlName="total">
               </div>
               <button type="submit"
                 class="btn btn-primary">
                 Añadir presupuesto
               </button>
       </form>
+      <pre>
+        Valor del formulario 
+        {{ presupuestoForm.value | json }}
+      </pre>
+      <pre>
+          Estado del formulario 
+          {{ presupuestoForm.status | json }}
+        </pre>
+        <pre>
+            Valor del objeto
+            {{ presupuesto | json }}
+          </pre>
       </div>
       <div class="col col-md"></div>
     </div>
