@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+//se importa el servicio
+import { PresupuestosService } from '../../servicios/presupuestos.service';
 
 @Component({
   selector: 'app-addpres',
@@ -16,7 +18,9 @@ export class AddpresComponent implements OnInit {
   total: any = 0;
  
  
-  constructor(private pf: FormBuilder) { }
+  //se declara el servicio como parte del componente
+  constructor(private pf: FormBuilder, 
+    private presupuestoService: PresupuestosService) { }
 
   ngOnInit() {
     this.presupuestoForm = this.pf.group({
@@ -42,6 +46,11 @@ export class AddpresComponent implements OnInit {
 
   onSubmit(){
     this.presupuesto = this.savePresupuesto();
+    //se manda a llamar al metodo postPresupoesto del objeto presupuestoService y se envia como parametro
+    //el objeto que recibe y procesa el formulario (preupuesto)
+    this.presupuestoService.postPresupuesto(this.presupuesto).subscribe(newpres => {
+
+    });
   }
   savePresupuesto(){
     const savePresupuesto = {
