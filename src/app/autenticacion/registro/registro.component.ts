@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AutenticacionService} from '../../servicios/autenticacion.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +13,10 @@ export class RegistroComponent implements OnInit {
   registroForm: FormGroup;
   userdata: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private autenticacionService: AutenticacionService,
+              private router: Router,
+              private activatedRouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.registroForm = this.formBuilder.group({
@@ -26,6 +31,8 @@ export class RegistroComponent implements OnInit {
 
   onSubmit(){
     this.userdata = this.saveUserData();
+    this.autenticacionService.registroUsuario(this.userdata);
+    this.router.navigate(['/inicio']);
   }
 
   saveUserData(){
