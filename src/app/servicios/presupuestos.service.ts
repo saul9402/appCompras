@@ -12,6 +12,7 @@ export class PresupuestosService {
 
   //se pone la url de la base de datos y despues el nombre de la 'tabla' o coleccion con extension
   presURL = 'https://comprasapp-a57eb.firebaseio.com/presupuestos.json';
+  preURL = 'https://comprasapp-a57eb.firebaseio.com/presupuestos';
 
   constructor(private http: Http) { }
 
@@ -26,9 +27,36 @@ export class PresupuestosService {
     //se hace la peticion con el objeto declarado arriba de http
     //se manda la url, la variable a guardar, en este caso el presupuesto y los headers
     return this.http.post(this.presURL, newPres, {headers})
-        map((res: Response) => {
-        console.log(res.json());
-        return res.json();
-      });
+       // map((res: Response) => {
+       // console.log(res.json());
+        //return res.json();
+      //});
   }
+
+  getPresupuestos(){
+      /*this.http.get(this.presURL).map((res: Response) => {
+        alert( res.json());
+      })*/
+      return this.http.get(this.presURL);
+          //map((res: Response) => {
+      //alert(res.json());
+      //return res.json();
+     //});
+    }
+
+    getPrespuesto(id$: string){
+      const url = `${this.preURL}/${id$}.json`;
+      return this.http.get(url)/*.sjon*/;
+    }
+
+    putPresupuesto(presupuesto: any, id$: string){
+      const newpre = JSON.stringify(presupuesto);
+      const headers = new Headers({
+        'Content-Type' : 'application/json'
+      })
+      const url = `${this.preURL}/${id$}.json`;
+      return this.http.put(url, newpre, {headers});
+
+ }
+
 }

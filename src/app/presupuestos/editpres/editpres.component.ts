@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 //se importa el servicio
 import { PresupuestosService } from '../../servicios/presupuestos.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-addpres',
-  templateUrl: './addpres.component.html',
-  styleUrls: ['./addpres.component.css']
+  selector: 'app-editpres',
+  templateUrl: './editpres.component.html',
+  styleUrls: ['./editpres.component.css']
 })
-export class AddpresComponent implements OnInit {
+export class EditpresComponent implements OnInit {
 
   presupuestoForm: FormGroup;
   presupuesto: any;
@@ -16,11 +17,23 @@ export class AddpresComponent implements OnInit {
   tipo: any;
   iva: any = 0;
   total: any = 0;
+
+  id: string;
  
- 
-  //se declara el servicio como parte del componente
-  constructor(private pf: FormBuilder, 
-    private presupuestoService: PresupuestosService) { }
+  constructor(
+    private pf: FormBuilder, 
+    private presupuestoService: PresupuestosService,
+    private router: Router,
+    private ativatedRouter: ActivatedRoute) {
+      this.ativatedRouter.params
+        .subscribe(parametros => {
+          this.id = parametros['id'];
+          this.presupuestoService.getPrespuesto(this.id)
+            .subscribe( presupuesto => {
+              this.presupuesto = presupuesto.json();
+            })
+        })
+     }
 
   ngOnInit() {
     this.presupuestoForm = this.pf.group({
@@ -43,12 +56,14 @@ export class AddpresComponent implements OnInit {
       this.presupuestoForm.value.total = this.base + (this.base*this.tipo);
     })
   }
-
   onSubmit(){
     this.presupuesto = this.savePresupuesto();
     //se manda a llamar al metodo postPresupoesto del objeto presupuestoService y se envia como parametro
     //el objeto que recibe y procesa el formulario (preupuesto)
-    this.presupuestoService.postPresupuesto(this.presupuesto).subscribe(newpres => {
+    this.presupuestoService.putPresupuesto(this.presupuesto, this.id)
+      .subscribe(newpres => {
+        //sirve para redirigir, :3
+        this.router.navigate(['/presupuestos']);
       //alert(newpres.json());
     });
     this.presupuestoForm.reset();
