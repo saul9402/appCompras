@@ -13,6 +13,26 @@ export class RegistroComponent implements OnInit {
   registroForm: FormGroup;
   userdata: any;
 
+  /*
+  Nueva forma de validar
+  */
+  erroresForm = {
+    'email':'',
+    'password': ''
+  }
+
+  mensajesValidacion = {
+    'email':{
+      'required': 'Email Obligatorio',
+      'email':'Introduzca un email correcto'
+    },
+    'password':{
+      'required': 'Contraseña Obligatoria',
+      'pattern':'La cotraseña debe tener al menos un numero y una letra',
+      'minlength':'y más de 6 caracteres'
+    }
+  }
+
   constructor(private formBuilder: FormBuilder,
               private autenticacionService: AutenticacionService,
               private router: Router,
@@ -27,6 +47,10 @@ export class RegistroComponent implements OnInit {
         Validators.minLength(6)
       ]]
     });
+    this.registroForm.valueChanges.subscribe(data => {
+      this.onValueChanged(data); 
+    })
+    this.onValueChanged();
   }
 
   onSubmit(){
@@ -42,5 +66,23 @@ export class RegistroComponent implements OnInit {
     }
     return saveUserData;
   }
+
+
+  onValueChanged(data?: any) {
+    if (!this.registroForm) { return; }
+    const form = this.registroForm;
+    for (const field in this.erroresForm) {
+      
+      this.erroresForm[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.mensajesValidacion[field];
+        for (const key in control.errors) {
+          this.erroresForm[field] += messages[key] + ' ';
+         }
+       }
+     }
+   }
+
 
 }
