@@ -16,6 +16,7 @@ import { AddpresComponent } from './presupuestos/addpres/addpres.component';
 import { PresupuestosService } from './servicios/presupuestos.service';
 import { PresupuestosComponent } from './presupuestos/presupuestos/presupuestos.component';
 import { EditpresComponent } from './presupuestos/editpres/editpres.component';
+import { RegistroComponent } from './autenticacion/registro/registro.component';
 
   const routes: Routes =[
     {path: '', component: InicioComponent},
@@ -37,7 +38,8 @@ import { EditpresComponent } from './presupuestos/editpres/editpres.component';
     AddproveeComponent,
     AddpresComponent,
     PresupuestosComponent,
-    EditpresComponent
+    EditpresComponent,
+    RegistroComponent
   ],
   //en import se agregan las clases angular a usar en la aplicacion
   imports: [
