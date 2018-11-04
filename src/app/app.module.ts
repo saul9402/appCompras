@@ -25,6 +25,7 @@ import { RegistroComponent } from './autenticacion/registro/registro.component';
     {path: 'addpres', component: AddpresComponent},
     {path: 'presupuestos', component: PresupuestosComponent},
     {path: 'editpres/:id', component: EditpresComponent},
+    {path: 'registro', component: RegistroComponent},
     {path: '**', component: InicioComponent}
   ];
 
