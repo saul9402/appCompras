@@ -19,14 +19,20 @@ import { EditpresComponent } from './presupuestos/editpres/editpres.component';
 import { RegistroComponent } from './autenticacion/registro/registro.component';
 import { AutenticacionService } from './servicios/autenticacion.service';
 import { InisesComponent } from './autenticacion/inises/inises.component';
+import { GuardService } from './servicios/guard.service';
 
   const routes: Routes =[
     {path: '', component: InicioComponent},
-    {path: 'proveedores', component: ProveedoresComponent},
-    {path: 'addprovee', component: AddproveeComponent},
-    {path: 'addpres', component: AddpresComponent},
-    {path: 'presupuestos', component: PresupuestosComponent},
-    {path: 'editpres/:id', component: EditpresComponent},
+    {path: 'proveedores', component: ProveedoresComponent,
+      canActivate: [GuardService] },
+    {path: 'addprovee', component: AddproveeComponent,
+    canActivate: [GuardService]},
+    {path: 'addpres', component: AddpresComponent,
+    canActivate: [GuardService]},
+    {path: 'presupuestos', component: PresupuestosComponent,
+    canActivate: [GuardService]},
+    {path: 'editpres/:id', component: EditpresComponent,
+    canActivate: [GuardService]},
     {path: 'registro', component: RegistroComponent},
     {path: 'inises', component: InisesComponent},
     {path: '**', component: InicioComponent}
@@ -58,7 +64,8 @@ import { InisesComponent } from './autenticacion/inises/inises.component';
   //En providers se agregan los servicios
   providers: [ProveedoresService,
               PresupuestosService,
-              AutenticacionService],
+              AutenticacionService,
+              GuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
