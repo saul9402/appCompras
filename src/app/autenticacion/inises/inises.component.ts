@@ -13,6 +13,7 @@ export class InisesComponent implements OnInit {
 
   loginForm: FormGroup;
   userdata: any;
+  mensaje = false;
 
   constructor(private formBuilder: FormBuilder,
     private autenticacionService: AutenticacionService,
@@ -33,6 +34,11 @@ export class InisesComponent implements OnInit {
   onSubmit(){
     this.userdata = this.saveUserData();
     this.autenticacionService.inicioSesion(this.userdata);
+    setTimeout(() => {
+      if(this.isAuth() === false){
+        this.mensaje = true;
+      }
+    }, 2000)
   }
 
   saveUserData(){
@@ -41,6 +47,10 @@ export class InisesComponent implements OnInit {
       password: this.loginForm.get('password').value
     }
     return saveUserData;
+  }
+
+  isAuth(){
+    return this.autenticacionService.isAuthenticated();
   }
 
 }

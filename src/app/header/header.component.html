@@ -8,20 +8,29 @@
   <div class="collapse navbar-collapse" id="containerNavbar">
     <ul class="navbar-nav mr-auto w-100 justify-content-end">
       <li class="nav-item" routerLinkActive="active"   
-          [routerLinkActiveOptions]="{exact:true}">
+          [routerLinkActiveOptions]="{exact:true}"
+          *ngIf="isAuth()"> <!--exact:true sirve para que el match con la palabra sea exacto-->
           <a class="nav-link" routerLink="/">Inicio </a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
-          <a class="nav-link" routerLink="/proveedores">Proveedores</a>
+          <a class="nav-link" routerLink="/proveedores"
+          *ngIf="isAuth()">Proveedores</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
           <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
-            <a class="nav-link" routerLink="/presupuestos">Presupuestos</a>
+            <a class="nav-link" routerLink="/presupuestos"
+            *ngIf="isAuth()">Presupuestos</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li class="nav-item" routerLinkActive="active"
+        *ngIf="!isAuth()">
           <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
-            <a class="nav-link" routerLink="/inises">Inicio Sesion</a>
+            <button class="btn -btn-primary" routerLink="/inises">Inicio Sesion</button>
+        </li>
+        <li class="nav-item" routerLinkActive="active"
+        *ngIf="isAuth()">
+          <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
+            <button class="btn -btn-primary" (click)="onLogout()" >Cerrar Sesion</button>
         </li>
     </ul>
 </div>

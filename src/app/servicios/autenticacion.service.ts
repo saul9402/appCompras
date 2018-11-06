@@ -28,5 +28,20 @@ export class AutenticacionService {
         })
   }
 
+  //para saber si el usuario actual está autenticado
+  isAuthenticated(){
+    const user = firebase.auth().currentUser;
+    if(user){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  //para hacer el cierre de sesion
+    logout(){
+      firebase.auth().signOut();
+    }
+  
+
 
 }
