@@ -20,6 +20,10 @@ import { RegistroComponent } from './autenticacion/registro/registro.component';
 import { AutenticacionService } from './servicios/autenticacion.service';
 import { InisesComponent } from './autenticacion/inises/inises.component';
 import { GuardService } from './servicios/guard.service';
+//Se agrega el nuevo modulo al modulo raíz para poder usarlo en la aplicacion 
+import { FacturasModule } from './facturas/facturas.module';
+//tambipen se importa el componente y queda listo
+import { AddfraComponent } from './facturas/facturas/addfra/addfra.component';
 
   const routes: Routes =[
     {path: '', component: InicioComponent},
@@ -35,6 +39,7 @@ import { GuardService } from './servicios/guard.service';
     canActivate: [GuardService]},
     {path: 'registro', component: RegistroComponent},
     {path: 'inises', component: InisesComponent},
+    {path: 'addfra', component: AddfraComponent},
     {path: '**', component: InicioComponent}
   ];
 
@@ -59,13 +64,16 @@ import { GuardService } from './servicios/guard.service';
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    //se agrega aqui también y queda listo para usar
+    FacturasModule
   ],
   //En providers se agregan los servicios
   providers: [ProveedoresService,
               PresupuestosService,
               AutenticacionService,
               GuardService],
+  //Indica cual es el componente raíz
   bootstrap: [AppComponent]
 })
 export class AppModule { }
