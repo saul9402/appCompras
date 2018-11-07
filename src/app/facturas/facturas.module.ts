@@ -1,26 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { CommonModule } from '@angular/common';
-import { AddfraComponent } from './facturas/addfra/addfra.component';
 
-//se deben de importar los modulos que se deseen usar, a´´un cuando ya estén en el componente raíz
-//puesto que los componentes que gestiona este modulo no los podrán ver
+import { FacturasComponent } from './facturas/facturas/facturas.component';
+import { AddfraComponent } from './facturas/addfra/addfra.component'
+import { EditfraComponent } from './facturas/editfra/editfra.component';
+import { FacturasService } from './facturas/facturas.service';
+
+const routes: Routes = [
+  { path: 'facturas', component: FacturasComponent },
+  { path: 'addfra', component: AddfraComponent },
+  { path: 'editfra/:id', component: EditfraComponent },
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    //se agregan los modulos para poder usarlos
-    BrowserModule,
-    FormsModule,
+    RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
   ],
-  declarations: [AddfraComponent],
-  //se agregan servicios de forma manual
-  providers: []
+  declarations: [FacturasComponent, AddfraComponent, EditfraComponent],
+  providers: [FacturasService]
 })
 export class FacturasModule { }

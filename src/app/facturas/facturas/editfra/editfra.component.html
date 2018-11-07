@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset 2">
-    <h2>Añadir nueva factura</h2>
+    <h2>Editar Factura</h2>
     <a class="btn btn-primary float-md-right" routerLink="/facturas">Regresar al listado</a>
     <br>
     <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()">
@@ -11,17 +11,18 @@
           <i class="fa fa-exclamation-circle uncheck"
                *ngIf="facturaForm.controls.proveedor.invalid &&
                facturaForm.controls.proveedor.touched"></i>
-        <input type="text"
-               class="form-control"
-               id="proveedor"
-               formControlName="proveedor">
+          <input type="text"
+                 class="form-control"
+                 id="proveedor"
+                 formControlName="proveedor"
+                 [(ngModel)]="factura.proveedor">
           <p class="alert alert-danger" *ngIf="facturaForm.controls.proveedor.invalid &&
                  facturaForm.controls.proveedor.touched">
             El campo Proveedor es obligatorio.
           </p>
         </div>
         <div class="form-group">
-          <label for="fecha">Fecha Factura</label>
+          <label for="fecha">Fecha factura</label>
         <i class="fa fa-check-circle check"
                *ngIf="facturaForm.controls.fecha.valid"></i>
           <i class="fa fa-exclamation-circle uncheck"
@@ -30,7 +31,8 @@
           <input type="date"
                  class="form-control"
                  id="fecha"
-                 formControlName="fecha">
+                 formControlName="fecha"
+                 [(ngModel)]="factura.fecha">
           <p class="alert alert-danger" *ngIf="facturaForm.controls.fecha.invalid &&
                  facturaForm.controls.fecha.touched">
             El campo Fecha es obligatorio.
@@ -46,7 +48,8 @@
           <input type="text"
                  class="form-control"
                  id="concepto"
-                 formControlName="concepto">
+                 formControlName="concepto"
+                 [(ngModel)]="factura.concepto">
           <p class="alert alert-danger" *ngIf="facturaForm.controls.concepto.invalid &&
                  facturaForm.controls.concepto.touched">
             El nº de Factura y Concepto es obligatorio y debe tener más de 10 caracteres.
@@ -62,7 +65,8 @@
           <input type="number"
                  class="form-control"
                  id="base"
-                 formControlName="base">
+                 formControlName="base"
+                 [(ngModel)]="factura.base">
           <p class="alert alert-danger" *ngIf="facturaForm.controls.base.invalid &&
                  facturaForm.controls.base.touched">
             El campo Base Imponible es obligatorio.
@@ -77,7 +81,8 @@
                facturaForm.controls.tipo.touched"></i>
           <select class="form-control"
                   id="tipo"
-                  formControlName="tipo">
+                  formControlName="tipo"
+                  [(ngModel)]="factura.tipo">
                   <option value="">Seleccione...</option>
                   <option value=0> 0 %</option>
                   <option value=0.04> 4 %</option>
@@ -110,17 +115,15 @@
         <button type="submit"
               class="btn btn-primary"
               [disabled]="!facturaForm.valid"
-              >Añadir Factura</button>
+              >Guardar Cambios</button>
         <a class="btn btn-danger" routerLink="/facturas">Cancelar</a>
-        <p class="alert alert-danger" *ngIf="!facturaForm.valid">
+        <p class="alert alert-warning" *ngIf="!facturaForm.valid">
           Por favor complete todos los campos
         </p>
     </form>
     <hr>
    </div>
 </div>
-
-
 
 
 
