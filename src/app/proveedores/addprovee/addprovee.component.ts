@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+//se importa el servicio
+import { ProveedoresService } from '../../servicios/proveedores.service';
 
 @Component({
   selector: 'app-addprovee',
@@ -8,8 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AddproveeComponent implements OnInit {
 
-  //Con esto se usan los componente de angular para recibir el objeto del formulario. Se usa el id del html para enlazar el formulario con este archivo
-  @ViewChild('formpro') formpro: NgForm;
+  proveedorForm: FormGroup;
   proveedor: any;
   provincias: string[] = [ 'Álava','Albacete','Alicante','Almería','Asturias','Ávila','Badajoz',
   'Barcelona','Burgos', 'Cáceres', 'Cádiz','Cantabria','Castellón','Ciudad Real','Córdoba',
@@ -19,35 +20,49 @@ export class AddproveeComponent implements OnInit {
   'Tarragona','Santa Cruz de Tenerife','Teruel','Toledo','Valencia','Valladolid','Vizcaya',
   'Zamora','Zaragoza' ]
 
-  constructor() { 
-  this.proveedor = {
-    nombre: '',
-    cif: '',
-    direccion: '',
-    cp: '',
-    localidad: '',
-    provincia:'',
-    telefono: null,
-    email: '',
-    contacto: ''}
+  constructor(private pf: FormBuilder, 
+    private proveedorService: ProveedoresService) { 
+
   }
 
 
   ngOnInit() {
+    this.proveedorForm = this.pf.group({
+      nombre: ['', Validators.required],
+      cif: ['', Validators.required],
+      direccion: ['', Validators.required],
+      cp: ['', Validators.required],
+      localidad: ['', Validators.required],
+      provincia: ['', Validators.required],
+      telefono: ['', Validators.required],
+      email: ['', Validators.required],
+      contacto: ['', Validators.required]
+    }); 
   }
 
   onSubmit(){
-    this.proveedor.nombre = this.formpro.value.nombre;
-    this.proveedor.cif = this.formpro.value.cif;
-    this.proveedor.direccion = this.formpro.value.direccion;
-    this.proveedor.cp = this.formpro.value.cp;
-    this.proveedor.localidad = this.formpro.value.localidad;
-    this.proveedor.provincia = this.formpro.value.provincia;
-    this.proveedor.telefono = this.formpro.value.telefono;
-    this.proveedor.email = this.formpro.value.email;
-    this.proveedor.contacto = this.formpro.value.contacto;
-    
-    this.formpro.reset();
+    this.proveedor = this.saveProveedor();
+    //se manda a llamar al metodo postPresupoesto del objeto proveedorService y se envia como parametro
+    //el objeto que recibe y procesa el formulario (preupuesto)
+    this.proveedorService.postProveedor(this.proveedor).subscribe(newpres => {
+      //alert(newpres.json());
+    });
+    this.proveedorForm.reset();
+  }
+
+  saveProveedor(){
+    const saveProveedor = {
+      nombre: this.proveedorForm.get('nombre').value,
+      cif: this.proveedorForm.get('cif').value,
+      direccion: this.proveedorForm.get('direccion').value,
+      cp: this.proveedorForm.get('cp').value,
+      localidad: this.proveedorForm.get('localidad').value,
+      provincia: this.proveedorForm.get('provincia').value,
+      telefono: this.proveedorForm.get('telefono').value,
+      email: this.proveedorForm.get('email').value,
+      contacto: this.proveedorForm.get('contacto').value,
+    }
+    return saveProveedor;
   }
 
 }
