@@ -13,7 +13,9 @@
         formControlName="password">
         <hr>
         <button type="submit" class="btn btn-primary"
-         [disabled] = "!loginForm.valid">Inicie Sesion</button>
+          [disabled] = "!loginForm.valid" *ngIf="!autenticando">Inicie Sesion</button>
+         <button type="submit" class="btn btn-primary"
+          *ngIf="autenticando">Autenticando usuario...</button>
     </form>
     <p>Si no dispone de cuenta, pulse <a routerLink='/registro'>aquí</a></p>
     <p class="alert alert-danger" *ngIf="mensaje">
