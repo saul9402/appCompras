@@ -1,9 +1,13 @@
 <h3>Listado de proveedores</h3>
 <a class="btn btn-primary float-md-right" routerLink="/addprovee">Añadir nuevo proveedor</a>
+<!--Buscador reactivo-->
+<input type="search" placeholder="teclee un proveedor..."
+  class="form-control" [formControl]="campoBusqueda">
+  <!--Spinner-->
 <div *ngIf="cargando" class="text-center" style="padding-top: 60px;">
   <img src="../../../assets/spinner.gif" alt="Cargando">
 </div>
-<div *ngIf="!cargando">
+<div *ngIf="resultados">
   <table class="table table-bordered table-striped" style="margin-top: 40px">
   <thead>
     <tr class="filters">
@@ -20,4 +24,7 @@
     </tr>
   </tbody>
   </table>
+</div>
+<div *ngIf="noresultados">
+  <p>No existe ninguan coincidencia</p>
 </div>
