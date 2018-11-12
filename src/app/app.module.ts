@@ -4,6 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule  } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from './config/firebase.config';
 
 
 import { AppComponent } from './app.component';
@@ -67,7 +71,11 @@ import { FacturasComponent } from './facturas/facturas/facturas/facturas.compone
     ReactiveFormsModule,
     HttpModule,
     //se agrega aqui también y queda listo para usar
-    FacturasModule
+    FacturasModule,
+    //se inicializa la app con el archivo de configuracion que se declaro antes
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule 
   ],
   //En providers se agregan los servicios
   providers: [ProveedoresService,
