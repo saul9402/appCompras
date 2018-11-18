@@ -22,6 +22,16 @@
             <a class="nav-link" routerLink="/presupuestos"
             *ngIf="isAuth()">Presupuestos</a>
         </li>
+        <li class="nav-item" routerLinkActive="active">
+            <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
+              <a class="nav-link" routerLink="/facturas"
+              *ngIf="isAuth()">Facturas</a>
+          </li>
+        <li class="nav-item" routerLinkActive="active">
+            <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->
+              <a class="nav-link" routerLink="/contratos"
+              *ngIf="isAuth()">Contratos</a>
+          </li>
         <li class="nav-item" routerLinkActive="active"
         *ngIf="!isAuth()">
           <!--Con routerLink se le dice que esa será la ruta que estará asociada con el app.module-->

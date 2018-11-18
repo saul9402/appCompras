@@ -29,6 +29,10 @@ import { FacturasModule } from './facturas/facturas.module';
 //tambipen se importa el componente y queda listo
 import { AddfraComponent } from './facturas/facturas/addfra/addfra.component';
 import { FacturasComponent } from './facturas/facturas/facturas/facturas.component';
+import { UploadComponent } from './uploads/upload/upload.component';
+import { LoadfileService  } from './servicios/loadfile.service';
+import { ContratosComponent } from './uploads/contratos/contratos.component';
+import { DetallesComponent } from './uploads/detalles/detalles.component';
 
   const routes: Routes =[
     {path: '', component: InicioComponent},
@@ -45,6 +49,8 @@ import { FacturasComponent } from './facturas/facturas/facturas/facturas.compone
     {path: 'registro', component: RegistroComponent},
     {path: 'inises', component: InisesComponent},
     { path: 'facturas', component: FacturasComponent },
+    { path: 'uploads', component: UploadComponent },
+    { path: 'contratos', component: ContratosComponent },
     {path: '**', component: InicioComponent}
   ];
 
@@ -60,7 +66,10 @@ import { FacturasComponent } from './facturas/facturas/facturas/facturas.compone
     PresupuestosComponent,
     EditpresComponent,
     RegistroComponent,
-    InisesComponent
+    InisesComponent,
+    UploadComponent,
+    ContratosComponent,
+    DetallesComponent
   ],
   //en import se agregan las clases angular a usar en la aplicacion
   imports: [
@@ -81,7 +90,8 @@ import { FacturasComponent } from './facturas/facturas/facturas/facturas.compone
   providers: [ProveedoresService,
               PresupuestosService,
               AutenticacionService,
-              GuardService],
+              GuardService,
+              LoadfileService],
   //Indica cual es el componente raíz
   bootstrap: [AppComponent]
 })
