@@ -1,1 +1,43 @@
-<h3>Bienvenido a la aplicacion</h3>
+<div class="text-center" style="margin: 40px;">
+    <h3>Bienvenido a la aplicacion</h3>
+</div>
+
+<div class="text-center" style="margin: 20px;" *ngIf="!isAuth()">
+    <h4>Inicie Sesion para acceder</h4>
+</div>
+
+<div class="row" *ngIf="isAuth()">
+    <div class="col-md-3">
+        <a routerLink="/proveedores" style="text-decoration: none">
+        <div class="rectorange">
+            <i class="fa fa-address-book-o" style="font-size: 60px;"></i>
+            <p style="font-size: 24px; padding-top: 15 px;">proveedores</p>
+        </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+            <a routerLink="/presupuestos" style="text-decoration: none">
+            <div class="rectgreen">
+                <i class="fa fa-usd" style="font-size: 60px;"></i>
+                <p style="font-size: 24px; padding-top: 15 px;">presupuestos</p>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+                <a routerLink="/facturas" style="text-decoration: none">
+                <div class="rectviolet">
+                    <i class="fa fa-cart-plus" style="font-size: 60px;"></i>
+                    <p style="font-size: 24px; padding-top: 15 px;">facturas</p>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                    <a routerLink="/contratos" style="text-decoration: none">
+                    <div class="rectpink">
+                        <i class="fa fa-map" style="font-size: 60px;"></i>
+                        <p style="font-size: 24px; padding-top: 15 px;">contratos</p>
+                    </div>
+                    </a>
+                </div>
+
+</div>
